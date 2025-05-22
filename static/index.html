@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>Dosya Yöneticisi</title>
+    <style>
+        body{font-family:sans-serif;max-width:720px;margin:auto}
+        #files img{height:60px}
+    </style>
+</head>
+<body>
+<h1>Dosya Yöneticisi</h1>
+
+<div id="auth">
+    <h3>Giriş / Kayıt</h3>
+    <input id="user" placeholder="kullanıcı adı" />
+    <input id="pass" placeholder="şifre" type="password" />
+    <button onclick="register()">Kayıt</button>
+    <button onclick="login()">Giriş</button>
+</div>
+
+<div id="panel" style="display:none">
+    <h3>Dosya Yükle</h3>
+    <input type="file" id="file"/>
+    <button onclick="upload()">Gönder</button>
+    <h3>Dosyalarım</h3>
+    <ul id="files"></ul>
+</div>
+
+<script>
+    let token=''
+    function register(){auth('/api/auth/register')}
+    function login(){auth('/api/auth/login')}
+    function auth(url){
+        fetch(url,{method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({username:user.value,password:pass.value})})
+            .then(r=>r.json()).then(d=>{
+            token=d.token;panel.style.display='block';auth.style.display='none';list();
+        })
+    }
+    function upload(){
+        let fd=new FormData();fd.append('file',file.files[0]);
+        fetch('/api/files',{method:'POST',headers:{'Authorization':'Bearer '+token},body:fd})
+            .then(()=>list());
+    }
+    function del(id){fetch('/api/files/'+id,{method:'DELETE',headers:{Authorization:'Bearer '+token}})
+        .then(()=>list());}
+    function list(){
+        fetch('/api/files',{headers:{Authorization:'Bearer '+token}})
+            .then(r=>r.json()).then(arr=>{
+            files.innerHTML='';
+            arr.forEach(f=>{
+                let li=document.createElement('li');
+                li.innerHTML=`${f.OriginName} <button onclick="del('${f.ID}')">sil</button>`;
+                files.appendChild(li);
+            });
+        });
+    }
+</script>
+</body>
+</html>
