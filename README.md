@@ -1,4 +1,4 @@
-**FileManager-API**
+#**FileManager-API**
 Backend : Go + Gin + GORM + JWT
 Frontend : Basit HTML/JS tek sayfa (static/index.html)
 PDF / PNG / JPG dosyalarını yükleme-listeleme-silme.
