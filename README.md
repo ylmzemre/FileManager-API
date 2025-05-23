@@ -10,10 +10,16 @@
   PostgreSQL 14+ (yerel veya Docker)  
   Git (klonlamak için)  
 
-**Kurulum**
-Kaynak kodu alın
+## Kurulum
+Kaynak kodu alın  
 ```
 git clone https://github.com/<kullanıcı>/file-manager.git
 cd file-manager
 ```
-
+PostgreSQL (Docker ile)  
+```
+docker run --name file-db \
+  -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_DB=file_db \
+  -p 5432:5432 -d postgres:15-alpine
+```
