@@ -1,6 +1,7 @@
 # FileManager-API
 
 Backend : Go + Gin + GORM + JWT
+
 Frontend : Basit HTML/JS tek sayfa (static/index.html)
 PDF / PNG / JPG dosyalarını yükleme-listeleme-silme.
 Dosya gövdesi disk’te /uploads, meta‐veri PostgreSQL’de tutulur.
