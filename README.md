@@ -44,3 +44,8 @@ GET	/api/files :	Dosya listesini döner (Auth)
 POST	/api/files :	multipart/form-data file yükler (Auth)  
 DELETE	/api/files/{id}	: Dosyayı siler (Auth)  
 
+## Web Arayüzü
+Tarayıcıda http://localhost:8080 açın.  
+Kullanıcı adı/şifre ile kayıt olun veya giriş yapın.  
+Dosya seçip “Gönder” butonuna basın.  
+Yüklenen dosyalar listelenir; “sil” ile kaldırabilirsiniz.  
