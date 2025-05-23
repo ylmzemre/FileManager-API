@@ -26,7 +26,7 @@ docker run --name file-db \
 Ortam Değişkenlerini Ayarlayın  
 ```
 export DB_DSN="host=localhost user=postgres password=postgres dbname=file_db port=5432 sslmode=disable"
-export JWT_SECRET="supersecret"      # rastgele bir ifade
+export JWT_SECRET="supersecret"
 export UPLOAD_DIR="./uploads"
 ```
 Bağımlılıkları Kur, Çalıştır
@@ -34,3 +34,13 @@ Bağımlılıkları Kur, Çalıştır
 go mod tidy
 go run main.go
 ```
+
+## Bilinmesi Gerekenler
+Sunucu http://localhost:8080 adresinde çalışır.  
+
+POST	/api/auth/register :	{username,password} → JWT token  
+POST	/api/auth/login : {username,password} → JWT token   
+GET	/api/files :	Dosya listesini döner (Auth)  
+POST	/api/files :	multipart/form-data file yükler (Auth)  
+DELETE	/api/files/{id}	: Dosyayı siler (Auth)  
+
